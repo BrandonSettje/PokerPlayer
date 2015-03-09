@@ -26,7 +26,7 @@ namespace PokerPlayer
             testHand.Add(new Card((int)Rank.Three, (int)Suit.Club));
             testHand.Add(new Card((int)Rank.Four, (int)Suit.Diamond));
             testHand.Add(new Card((int)Rank.Seven, (int)Suit.Club));
-            player.DrawHand(testHand);
+            player.hand(testHand);
             Assert.That(player.HandRank == PokerPlayer.HandType.HighCard);
             Assert.IsFalse(player.HasPair());
             Assert.IsFalse(player.HasFlush());
@@ -45,7 +45,7 @@ namespace PokerPlayer
             testHand.Add(new Card((int)Rank.Ten, (int)Suit.Diamond));
             testHand.Add(new Card((int)Rank.Eight, (int)Suit.Club));
             testHand.Add(new Card((int)Rank.Seven, (int)Suit.Heart));
-            player.DrawHand(testHand);
+            player.hand(testHand);
             Assert.That(player.HasPair());
             Assert.That(player.HandRank == PokerPlayer.HandType.OnePair);
             Assert.False(player.HasThreeOfAKind());
@@ -57,7 +57,7 @@ namespace PokerPlayer
             testHand.Add(new Card((int)Rank.Ten, (int)Suit.Diamond));
             testHand.Add(new Card((int)Rank.Eight, (int)Suit.Club));
             testHand.Add(new Card((int)Rank.Eight, (int)Suit.Diamond));
-            player.DrawHand(testHand);
+            player.hand(testHand);
             Assert.That(player.HasTwoPair());
             Assert.That(player.HandRank == PokerPlayer.HandType.TwoPair);
             Assert.IsFalse(player.HasThreeOfAKind());
@@ -70,7 +70,7 @@ namespace PokerPlayer
             testHand.Add(new Card((int)Rank.Ten, (int)Suit.Heart));
             testHand.Add(new Card((int)Rank.Eight, (int)Suit.Club));
             testHand.Add(new Card((int)Rank.Two, (int)Suit.Diamond));
-            player.DrawHand(testHand);
+            player.hand(testHand);
             Assert.That(player.HasThreeOfAKind());
             Assert.That(player.HandRank == PokerPlayer.HandType.ThreeOfAKind);
         }
@@ -82,7 +82,7 @@ namespace PokerPlayer
             testHand.Add(new Card((int)Rank.Five, (int)Suit.Heart));
             testHand.Add(new Card((int)Rank.Four, (int)Suit.Club));
             testHand.Add(new Card((int)Rank.Six, (int)Suit.Diamond));
-            player.DrawHand(testHand);
+            player.hand(testHand);
             Assert.That(player.HasStraight());
             Assert.That(player.HandRank == PokerPlayer.HandType.Straight);
             Assert.IsFalse(player.HasPair());
@@ -92,7 +92,7 @@ namespace PokerPlayer
             testHand.Add(new Card((int)Rank.King, (int)Suit.Heart));
             testHand.Add(new Card((int)Rank.Four, (int)Suit.Club));
             testHand.Add(new Card((int)Rank.Ace, (int)Suit.Diamond));
-            player.DrawHand(testHand);
+            player.hand(testHand);
             Assert.IsFalse(player.HasStraight());
             Assert.That(player.HandRank != PokerPlayer.HandType.Straight);
             testHand.Clear();
@@ -101,9 +101,10 @@ namespace PokerPlayer
             testHand.Add(new Card((int)Rank.King, (int)Suit.Heart));
             testHand.Add(new Card((int)Rank.Ace, (int)Suit.Club));
             testHand.Add(new Card((int)Rank.Ten, (int)Suit.Diamond));
-            player.DrawHand(testHand);
+            player.hand(testHand);
             Assert.That(player.HasStraight());
             Assert.That(player.HandRank == PokerPlayer.HandType.Straight);
+            testHand.Clear();
         }
         [Test]
         public void testHasFlush()
@@ -113,7 +114,7 @@ namespace PokerPlayer
             testHand.Add(new Card((int)Rank.Four, (int)Suit.Club));
             testHand.Add(new Card((int)Rank.Ace, (int)Suit.Club));
             testHand.Add(new Card((int)Rank.Ten, (int)Suit.Club));
-            player.DrawHand(testHand);
+            player.hand(testHand);
             Assert.That(player.HasFlush());
             Assert.That(player.HandRank == PokerPlayer.HandType.Flush);
             testHand.Clear();
@@ -122,7 +123,7 @@ namespace PokerPlayer
             testHand.Add(new Card((int)Rank.King, (int)Suit.Heart));
             testHand.Add(new Card((int)Rank.Ace, (int)Suit.Club));
             testHand.Add(new Card((int)Rank.Ten, (int)Suit.Diamond));
-            player.DrawHand(testHand);
+            player.hand(testHand);
             Assert.IsFalse(player.HasFlush());
             Assert.That(player.HandRank != PokerPlayer.HandType.Flush);
         }
@@ -134,7 +135,7 @@ namespace PokerPlayer
             testHand.Add(new Card((int)Rank.Ten, (int)Suit.Heart));
             testHand.Add(new Card((int)Rank.Eight, (int)Suit.Club));
             testHand.Add(new Card((int)Rank.Eight, (int)Suit.Diamond));
-            player.DrawHand(testHand);
+            player.hand(testHand);
             Assert.That(player.HasFullHouse());
             Assert.That(player.HandRank == PokerPlayer.HandType.FullHouse);
             testHand.Clear();
@@ -143,7 +144,7 @@ namespace PokerPlayer
             testHand.Add(new Card((int)Rank.Ten, (int)Suit.Heart));
             testHand.Add(new Card((int)Rank.Eight, (int)Suit.Club));
             testHand.Add(new Card((int)Rank.Two, (int)Suit.Diamond));
-            player.DrawHand(testHand);
+            player.hand(testHand);
             Assert.IsFalse(player.HasFullHouse());
             Assert.That(player.HandRank != PokerPlayer.HandType.FullHouse);
         }
@@ -155,7 +156,7 @@ namespace PokerPlayer
             testHand.Add(new Card((int)Rank.Ten, (int)Suit.Heart));
             testHand.Add(new Card((int)Rank.Ten, (int)Suit.Spade));
             testHand.Add(new Card((int)Rank.Queen, (int)Suit.Spade));
-            player.DrawHand(testHand);
+            player.hand(testHand);
             Assert.That(player.HasFourOfAKind());
             Assert.That(player.HandRank == PokerPlayer.HandType.FourOfAKind);
             testHand.Clear();
@@ -164,8 +165,8 @@ namespace PokerPlayer
             testHand.Add(new Card((int)Rank.Ten, (int)Suit.Club));
             testHand.Add(new Card((int)Rank.Ten, (int)Suit.Spade));
             testHand.Add(new Card((int)Rank.Queen, (int)Suit.Spade));
-            player.DrawHand(testHand);
-            Assert.IsFalse(player.HasFourOfAKind());
+            player.hand(testHand);
+            Assert.False(player.HasFourOfAKind());
             Assert.That(player.HandRank != PokerPlayer.HandType.FourOfAKind);
         }
         [Test]
@@ -176,7 +177,7 @@ namespace PokerPlayer
             testHand.Add(new Card((int)Rank.Five, (int)Suit.Club));
             testHand.Add(new Card((int)Rank.Four, (int)Suit.Club));
             testHand.Add(new Card((int)Rank.Six, (int)Suit.Club));
-            player.DrawHand(testHand);
+            player.hand(testHand);
             Assert.That(player.HasStraightFlush());
             Assert.That(player.HandRank == PokerPlayer.HandType.StraightFlush);
             Assert.IsFalse(player.HasPair());
@@ -186,7 +187,7 @@ namespace PokerPlayer
             testHand.Add(new Card((int)Rank.King, (int)Suit.Diamond));
             testHand.Add(new Card((int)Rank.Four, (int)Suit.Diamond));
             testHand.Add(new Card((int)Rank.Ace, (int)Suit.Diamond));
-            player.DrawHand(testHand);
+            player.hand(testHand);
             Assert.IsFalse(player.HasStraightFlush());
             Assert.That(player.HandRank != PokerPlayer.HandType.StraightFlush);
             testHand.Clear();
@@ -195,7 +196,7 @@ namespace PokerPlayer
             testHand.Add(new Card((int)Rank.King, (int)Suit.Heart));
             testHand.Add(new Card((int)Rank.Nine, (int)Suit.Heart));
             testHand.Add(new Card((int)Rank.Ten, (int)Suit.Heart));
-            player.DrawHand(testHand);
+            player.hand(testHand);
             Assert.That(player.HasStraightFlush());
             Assert.That(player.HandRank == PokerPlayer.HandType.StraightFlush);
         }
@@ -207,16 +208,17 @@ namespace PokerPlayer
             testHand.Add(new Card((int)Rank.Five, (int)Suit.Club));
             testHand.Add(new Card((int)Rank.Four, (int)Suit.Club));
             testHand.Add(new Card((int)Rank.Six, (int)Suit.Club));
-            player.DrawHand(testHand);
+            player.hand(testHand);
             Assert.IsFalse(player.HasRoyalFlush());
             Assert.That(player.HandRank != PokerPlayer.HandType.RoyalFlush);
             Assert.IsFalse(player.HasPair());
+            testHand.Clear();
             testHand.Add(new Card((int)Rank.Two, (int)Suit.Diamond));
             testHand.Add(new Card((int)Rank.Three, (int)Suit.Diamond));
             testHand.Add(new Card((int)Rank.King, (int)Suit.Diamond));
             testHand.Add(new Card((int)Rank.Four, (int)Suit.Diamond));
             testHand.Add(new Card((int)Rank.Ace, (int)Suit.Diamond));
-            player.DrawHand(testHand);
+            player.hand(testHand);
             Assert.IsFalse(player.HasRoyalFlush());
             Assert.That(player.HandRank != PokerPlayer.HandType.RoyalFlush);
             testHand.Clear();
@@ -225,7 +227,7 @@ namespace PokerPlayer
             testHand.Add(new Card((int)Rank.King, (int)Suit.Heart));
             testHand.Add(new Card((int)Rank.Ace, (int)Suit.Heart));
             testHand.Add(new Card((int)Rank.Ten, (int)Suit.Heart));
-            player.DrawHand(testHand);
+            player.hand(testHand);
             Assert.That(player.HasRoyalFlush());
             Assert.That(player.HandRank == PokerPlayer.HandType.RoyalFlush);
         }
